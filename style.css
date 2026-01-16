@@ -1,10 +1,10 @@
+/* 기존 :root, body 설정 유지... */
 :root {
     --bg-color: #121212;
-    --box-bg: #1e1e1e;
+    --box-bg: rgba(30, 30, 30, 0.85); /* [변경] 카드 배경을 반투명하게 */
     --text-main: #ffffff;
     --text-sub: #aaaaaa;
     --accent-color: #bb86fc;
-    --danger-color: #cf6679;
 }
 
 body {
@@ -18,21 +18,59 @@ body {
     margin: 0;
     padding: 20px;
     box-sizing: border-box;
+    overflow: hidden; /* 배경 이미지가 삐져나오지 않게 */
+}
+
+/* [추가] 배경 이미지 레이어 */
+#background-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: -2; /* 맨 뒤로 보냄 */
+    transition: background-image 0.5s ease-in-out; /* 이미지가 바뀔 때 부드럽게 */
+}
+
+/* [추가] 배경 움직임 효과 (천천히 확대됨) */
+.bg-zoom {
+    animation: zoomEffect 20s infinite alternate;
+}
+
+@keyframes zoomEffect {
+    from { transform: scale(1); }
+    to { transform: scale(1.1); }
+}
+
+/* [추가] 배경 오버레이 (검은 막) */
+#background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* 60% 어둡게 */
+    z-index: -1;
+    backdrop-filter: blur(3px); /* 배경을 살짝 흐리게 */
 }
 
 .app-container {
     width: 100%;
     max-width: 400px;
     min-height: 600px;
-    background-color: var(--box-bg);
+    background-color: var(--box-bg); /* 반투명 배경 적용 */
     border-radius: 20px;
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
     display: flex;
     flex-direction: column;
     overflow: hidden;
     position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1); /* 테두리 살짝 추가 */
 }
 
+/* 나머지 기존 CSS 유지 (screen-content, btn-primary 등...) */
 .screen-content {
     flex: 1;
     display: flex;
@@ -42,108 +80,23 @@ body {
     padding: 30px;
     text-align: center;
 }
-
-.main-title {
-    font-size: 28px;
-    font-weight: 700;
-    margin-bottom: 10px;
-    letter-spacing: -1px;
-}
-
-.sub-title {
-    color: var(--text-sub);
-    font-size: 14px;
-    letter-spacing: 2px;
-    margin-bottom: 40px;
-    text-transform: uppercase;
-}
-
-.main-message {
-    font-size: 18px;
-    line-height: 1.6;
-    margin-bottom: 60px;
-    font-weight: 300;
-}
-
-.btn-primary {
-    background-color: transparent;
-    border: 1px solid var(--text-main);
-    color: var(--text-main);
-    padding: 18px 0;
-    width: 100%;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s;
-    margin-bottom: 15px;
-}
-
-.btn-primary:hover {
-    background-color: var(--text-main);
-    color: var(--bg-color);
-}
-
-/* 상단 바 */
-.top-bar {
-    width: 100%;
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid #333;
-    color: var(--text-sub);
-    font-size: 14px;
-    box-sizing: border-box;
-}
-
-.scenario-box {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: left;
-    padding: 0 10px;
-    margin-bottom: 30px;
-}
-
-.scenario-text {
-    font-size: 20px;
-    line-height: 1.6;
-    white-space: pre-line;
-}
-
-/* 결과 화면 */
-.ending-title {
-    color: var(--accent-color);
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-.stat-container {
-    width: 100%;
-    margin-top: 30px;
-    background-color: #252525;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: left;
-}
-
+/* ... (이하 생략, 기존 코드 그대로 사용) ... */
+/* ... 만약 복사 붙여넣기 한다면 기존 style.css 내용을 다 지우고 다시 다 넣는 게 좋습니다 ... */
+/* --- 아래는 편의를 위해 기존 코드를 다시 적어드립니다 --- */
+.main-title { font-size: 28px; font-weight: 700; margin-bottom: 10px; }
+.sub-title { color: var(--text-sub); font-size: 14px; letter-spacing: 2px; margin-bottom: 40px; text-transform: uppercase; }
+.main-message { font-size: 18px; line-height: 1.6; margin-bottom: 60px; font-weight: 300; }
+.btn-primary { background-color: transparent; border: 1px solid var(--text-main); color: var(--text-main); padding: 18px 0; width: 100%; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; transition: all 0.3s; margin-bottom: 15px; }
+.btn-primary:hover { background-color: var(--text-main); color: var(--bg-color); }
+.top-bar { width: 100%; padding: 15px 20px; display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.1); color: var(--text-sub); font-size: 14px; box-sizing: border-box; }
+.scenario-box { flex: 1; display: flex; flex-direction: column; justify-content: center; text-align: left; padding: 0 10px; margin-bottom: 30px; }
+.scenario-text { font-size: 20px; line-height: 1.6; white-space: pre-line; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+.ending-title { color: var(--accent-color); font-size: 24px; margin-bottom: 20px; }
+.stat-container { width: 100%; margin-top: 30px; background-color: rgba(0,0,0,0.3); padding: 20px; border-radius: 10px; text-align: left; }
 .stat-row { margin-bottom: 15px; }
 .stat-label { font-size: 12px; color: var(--text-sub); display: flex; justify-content: space-between; margin-bottom: 5px; }
-.progress-track {
-    background-color: #444;
-    height: 10px;
-    border-radius: 5px;
-    overflow: hidden;
-}
-.progress-fill {
-    height: 100%;
-    background-color: var(--text-main);
-    width: 0%;
-    transition: width 1s ease-out;
-}
-
-/* 유틸리티 */
+.progress-track { background-color: #444; height: 10px; border-radius: 5px; overflow: hidden; }
+.progress-fill { height: 100%; width: 0%; transition: width 1s ease-out; }
 .hidden { display: none !important; }
 .fade-in { animation: fadeIn 0.5s ease-in; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
