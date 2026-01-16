@@ -1,11 +1,13 @@
-/* 기존 :root, body 설정 유지... */
+/* --- [1. 기본 설정 및 변수] --- */
 :root {
     --bg-color: #121212;
-    --box-bg: rgba(30, 30, 30, 0.85); /* [변경] 카드 배경을 반투명하게 */
+    --box-bg: rgba(30, 30, 30, 0.85); /* 오리지널 반투명 배경 */
     --text-main: #ffffff;
     --text-sub: #aaaaaa;
     --accent-color: #bb86fc;
 }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
     background-color: var(--bg-color);
@@ -17,86 +19,139 @@ body {
     min-height: 100vh;
     margin: 0;
     padding: 20px;
-    box-sizing: border-box;
-    overflow: hidden; /* 배경 이미지가 삐져나오지 않게 */
+    overflow: hidden;
 }
 
-/* [추가] 배경 이미지 레이어 */
+/* --- [2. 배경 이미지 레이어] --- */
 #background-layer {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0; width: 100%; height: 100%;
     background-size: cover;
     background-position: center;
-    z-index: -2; /* 맨 뒤로 보냄 */
-    transition: background-image 0.5s ease-in-out; /* 이미지가 바뀔 때 부드럽게 */
+    background-repeat: no-repeat;
+    z-index: -2;
+    transition: background-image 0.8s ease-in-out;
 }
 
-/* [추가] 배경 움직임 효과 (천천히 확대됨) */
-.bg-zoom {
-    animation: zoomEffect 20s infinite alternate;
-}
+.bg-zoom { animation: zoomEffect 20s linear infinite alternate; }
 
 @keyframes zoomEffect {
-    from { transform: scale(1); }
+    from { transform: scale(1.0); }
     to { transform: scale(1.1); }
 }
 
-/* [추가] 배경 오버레이 (검은 막) */
 #background-overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6); /* 60% 어둡게 */
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.5); 
     z-index: -1;
-    backdrop-filter: blur(3px); /* 배경을 살짝 흐리게 */
+    backdrop-filter: blur(2px);
 }
 
+/* --- [3. 게임 메인 박스 (UI)] --- */
 .app-container {
     width: 100%;
-    max-width: 400px;
+    max-width: 420px; /* 오리지널 사이즈에 가깝게 조정 */
     min-height: 600px;
-    background-color: var(--box-bg); /* 반투명 배경 적용 */
+    background-color: var(--box-bg);
     border-radius: 20px;
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
     display: flex;
     flex-direction: column;
     overflow: hidden;
     position: relative;
-    border: 1px solid rgba(255, 255, 255, 0.1); /* 테두리 살짝 추가 */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    /* ▼▼▼ [핵심] 평소에는 숨겨둠 ▼▼▼ */
+    opacity: 0;
+    visibility: hidden; 
+    transform: translateY(10px);
+    transition: all 0.5s ease-out; /* 부드럽게 나타나기 */
 }
 
-/* 나머지 기존 CSS 유지 (screen-content, btn-primary 등...) */
+/* 이 클래스가 붙으면 나타남 */
+.show-ui {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+}
+
+/* --- [4. 내부 요소 스타일 (간격 조정)] --- */
 .screen-content {
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify_content: center;
-    padding: 30px;
+    justify-content: center;
+    padding: 30px; /* 오리지널 패딩 값 유지 */
     text-align: center;
 }
-/* ... (이하 생략, 기존 코드 그대로 사용) ... */
-/* ... 만약 복사 붙여넣기 한다면 기존 style.css 내용을 다 지우고 다시 다 넣는 게 좋습니다 ... */
-/* --- 아래는 편의를 위해 기존 코드를 다시 적어드립니다 --- */
-.main-title { font-size: 28px; font-weight: 700; margin-bottom: 10px; }
-.sub-title { color: var(--text-sub); font-size: 14px; letter-spacing: 2px; margin-bottom: 40px; text-transform: uppercase; }
-.main-message { font-size: 18px; line-height: 1.6; margin-bottom: 60px; font-weight: 300; }
-.btn-primary { background-color: transparent; border: 1px solid var(--text-main); color: var(--text-main); padding: 18px 0; width: 100%; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; transition: all 0.3s; margin-bottom: 15px; }
-.btn-primary:hover { background-color: var(--text-main); color: var(--bg-color); }
-.top-bar { width: 100%; padding: 15px 20px; display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.1); color: var(--text-sub); font-size: 14px; box-sizing: border-box; }
-.scenario-box { flex: 1; display: flex; flex-direction: column; justify-content: center; text-align: left; padding: 0 10px; margin-bottom: 30px; }
-.scenario-text { font-size: 20px; line-height: 1.6; white-space: pre-line; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+
+.top-bar { 
+    width: 100%; padding: 15px 20px; display: flex; justify-content: space-between; 
+    border-bottom: 1px solid rgba(255,255,255,0.1); color: var(--text-sub); font-size: 14px; 
+}
+
+.main-title { 
+    font-size: 28px; 
+    font-weight: 700; 
+    margin-bottom: 15px; /* 제목 아래 간격 살짝 늘림 */
+}
+
+.sub-title { 
+    color: var(--text-sub); 
+    font-size: 14px; 
+    letter-spacing: 2px; 
+    margin-bottom: 50px; /* 제목과 본문 사이 간격 확보 */
+    text-transform: uppercase; 
+}
+
+.main-message { 
+    font-size: 18px; 
+    line-height: 1.8; /* 줄 간격을 넓혀서 답답하지 않게 */
+    margin-bottom: 60px; 
+    font-weight: 300; 
+}
+
+.scenario-box { 
+    flex: 1; display: flex; flex-direction: column; justify-content: center; 
+    text-align: left; padding: 10px 0; margin-bottom: 20px; width: 100%; 
+}
+
+.scenario-text { 
+    font-size: 20px; 
+    line-height: 1.8; /* 지문 줄 간격도 넉넉하게 */
+    white-space: pre-line; 
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5); 
+    font-weight: 400; 
+}
+
+.btn-primary { 
+    background-color: transparent; 
+    border: 1px solid var(--text-main); 
+    color: var(--text-main); 
+    padding: 18px 0; 
+    width: 100%; 
+    font-size: 16px; 
+    font-weight: bold; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    transition: all 0.3s; 
+    margin-bottom: 15px; 
+}
+.btn-primary:hover { 
+    background-color: var(--text-main); 
+    color: var(--bg-color); 
+}
+
+/* 엔딩 및 상태바 */
 .ending-title { color: var(--accent-color); font-size: 24px; margin-bottom: 20px; }
 .stat-container { width: 100%; margin-top: 30px; background-color: rgba(0,0,0,0.3); padding: 20px; border-radius: 10px; text-align: left; }
 .stat-row { margin-bottom: 15px; }
 .stat-label { font-size: 12px; color: var(--text-sub); display: flex; justify-content: space-between; margin-bottom: 5px; }
 .progress-track { background-color: #444; height: 10px; border-radius: 5px; overflow: hidden; }
-.progress-fill { height: 100%; width: 0%; transition: width 1s ease-out; }
+.progress-fill { height: 100%; width: 0%; transition: width 0.5s ease-out; background-color: #fff; }
+#bar-money { background-color: #f1c40f; }
+#bar-karma { background-color: #3498db; }
+#bar-stress { background-color: #e74c3c; }
 .hidden { display: none !important; }
-.fade-in { animation: fadeIn 0.5s ease-in; }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
