@@ -4,8 +4,8 @@ let currentState = { stageIndex: 0, money: 50, karma: 50, stress: 50 };
 const stageData = [
     {
         id: 1,
-        bgBefore: "stage1_green.jpg",
-        bgAfter: "stage1_yellow.jpg",
+        bgBefore: "stage1/stage1_green.jpg",
+        bgAfter: "stage1/stage1_yellow.jpg",
         text: "중요한 면접 10분 전,\n교차로 진입 직전 황색 신호등이 켜졌다.\n\n밟으면 통과, 멈추면 지각이다.",
         choices: [
             { text: "A. 풀악셀을 밟는다", money: 0, karma: -10, stress: 20 },
@@ -14,8 +14,8 @@ const stageData = [
     },
     {
         id: 2,
-        bgBefore: "stage2_lunch.jpg",
-        bgAfter: "stage2_colleague.jpg",
+        bgBefore: "stage2/stage2_lunch.jpg",
+        bgAfter: "stage2/stage2_colleague.jpg",
         text: "점심시간, 동기가 밥을 사달라고 한다.\n내 지갑 사정도 넉넉지 않은데...",
         choices: [
             { text: "A. 쿨하게 내가 산다! (-3만)", money: -30, karma: 10, stress: 0 },
@@ -24,8 +24,8 @@ const stageData = [
     },
     {
         id: 3,
-        bgBefore: "stage3_delete_v2.jpg",
-        bgAfter: "stage3_empty_v2.jpg",
+        bgBefore: "stage3/stage3_delete_v2.jpg",
+        bgAfter: "stage3/stage3_empty_v2.jpg",
         text: "업무 중 실수로 중요한 파일을 지웠다.\n아무도 본 사람은 없다.",
         choices: [
             { text: "A. 솔직하게 보고한다", money: 0, karma: 20, stress: 30 },
@@ -34,8 +34,8 @@ const stageData = [
     },
     {
         id: 4,
-        bgBefore: "stage4_cart_before.jpg",
-        bgAfter: "stage4_crash_final.jpg",
+        bgBefore: "stage4/stage4_cart_before.jpg",
+        bgAfter: "stage4/stage4_crash_final.jpg",
         text: "퇴근길, 쓰레기를 줍는 할머니의\n리어카가 요란한 소리를 내며 쓰러졌다!",
         choices: [
             { text: "A. 모른 척 지나간다", money: 0, karma: -30, stress: -10 },
