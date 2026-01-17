@@ -211,7 +211,7 @@ function updateBar(textId, barId, value) {
 
 function goHome() {
     switchScreen('page-home');
-    setBackground("start_bg_city.jpg"); 
+    setBackground("./start/start_bg_city.jpg"); 
     
     // 시작 화면 연출 수정: 0.6초(600ms) 뒤에 등장
     toggleUI(false);
