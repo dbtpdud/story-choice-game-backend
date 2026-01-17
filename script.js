@@ -49,25 +49,25 @@ const endings = [
         condition: (s) => s.karma >= 80, 
         title: "평온한 밤 (Happy)", 
         desc: "당신은 오늘 하루 떳떳하게 살았습니다. 두 다리 뻗고 편안하게 잠듭니다.",
-        image: "./ending/ending_happy_final.jpg"
+        image: "./ending1/ending_happy_final.jpg"
     },
     { 
         condition: (s) => s.stress >= 90, 
         title: "불면의 밤 (Bad)", 
         desc: "오늘 하루 너무 많은 스트레스를 받았습니다. 생각이 많아 잠이 오지 않습니다.",
-        image: "stress_night_final_v99.jpg" 
+        image: "./ending2/stress_night_final_v99.jpg" 
     },
     { 
         condition: (s) => s.money <= 10, 
         title: "배고픈 밤 (Poor)", 
         desc: "지갑은 텅 비었지만, 그래도 하루를 버텨냈습니다. 내일은 더 나아지겠죠.",
-        image: "./ending/ending_poor_final_v88.jpg"
+        image: "./ending2/ending_poor_final_v88.jpg"
     },
     { 
         condition: (s) => true, 
         title: "그저 그런 밤 (Normal)", 
         desc: "특별할 것 없는 하루였습니다. 내일도 비슷한 하루가 반복되겠죠.",
-        image: "./ending/ending_normal_final.jpg" 
+        image: "./ending1/ending_normal_final.jpg" 
     }
 ];
 
