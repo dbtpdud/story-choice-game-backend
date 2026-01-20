@@ -10,6 +10,9 @@ Markdown
 ![Version](https://img.shields.io/badge/Version-1.0.0-blue)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 
+> 팀 프로젝트 *Story Choice Game* 중 백엔드 서버(Express) 개발을 담당한 개인 정리용 레포지토리입니다.
+> 내용이 더 추가될 예정입니다.
+
 ## 📖 프로젝트 개요 (Overview)
 
 **'어느 하루의 무게'**는 평범한 직장인이 겪는 하루 동안의 딜레마를 다룬 **인터랙티브 스토리텔링 웹**입니다.
